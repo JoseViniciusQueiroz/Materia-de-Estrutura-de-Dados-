@@ -1,1 +1,1 @@
-testando.
+Repositório GitHub para compartilhamento de códigos da disciplina de Estruturas de Dados do 4º semestre de Engenharia de Software da Universidade de Brasília (UnB).
