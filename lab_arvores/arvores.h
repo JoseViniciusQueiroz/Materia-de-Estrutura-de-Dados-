@@ -54,4 +54,47 @@ bool buscaArvore(struct tree* A, char* palavra){
     }
 }
 
+
+struct tree* pricuraMinimo(struct tree* A) {
+    while (A->esquerda != NULL)
+      A = A->esquerda;
+    return A;
+}
+
+struct tree* deletarChar(struct tree* A, char* palavra){
+    if(A == NULL){
+        return A;
+    }
+    else if(strcmp(palavra,A->mes)<0){
+        A->esquerda = deletarChar(A->esquerda,palavra);
+    }
+    else if(strcmp(palavra,A->mes)>0){
+        A->direita = deletarChar(A->direita,palavra);
+    }
+    else{
+        if(A->esquerda == NULL && A->direita == NULL){
+            free(A);
+            A == NULL;
+        }
+        else if(A->esquerda == NULL){
+            struct tree* temporaria = A;
+            A = A->direita;
+            free(temporaria);
+        }
+        else if (A->direita == NULL){
+            struct tree* temporaria = A;
+            A = A->esquerda;
+            free(temporaria);
+        }
+        else{
+            struct tree* temporaria = pricuraMinimo(A->direita);
+            strcpy(A->mes,temporaria->mes);
+            A->direita = deletarChar(A->direita, temporaria->mes);
+        }
+    }
+    return A;
+}
+
+
+
 #endif 
